@@ -710,6 +710,80 @@ var Instr_EC_6_Instruction_posYellow = {
     },
   };
 
+
+ var Instr_EC_7_Placebo_posBlue = {
+    type: "html-keyboard-response",
+    post_trial_gap: 300,
+    choices: [32],
+    stimulus: function () {
+      var html = "";
+      html += "<h1>TASK 2: Recognition task</h1>";
+      html += "<p class = 'justify'>You will now perform the recognition task in which you will answer questions about the blue and yellow groups. Before going further, make sure you memorized the information we provided about these groups: ";
+      html += "<li><strong>The faces that were presented together with <b><u>pleasant images</b></u> were always those of the <span style='color:#2a57ea'><b>blue</b></span> group</strong></li>";
+      html += "<li><strong>The faces that were presented together with <u><b>unpleasant images</b></u> were always those of the <b><span style='color:#b5a21b'><b>yellow</b></span>  group</strong></li>";
+      html += "</ul>";
+      html += "<p class = 'justify'><b>It is extremely important that you remember this information (we will ask you about it later on).</b></b></p>";
+      html += "<br><br>";
+      html += "<p></br>Press <span class='light-keys'><kbd>space</kbd></span> to start Task 1</p>";
+      return html;
+    },
+  };
+
+ var Instr_EC_7_Placebo_posYellow = {
+    type: "html-keyboard-response",
+    post_trial_gap: 300,
+    choices: [32],
+    stimulus: function () {
+      var html = "";
+      html += "<h1>TASK 2: Recognition task</h1>";
+      html += "<p class = 'justify'>You will now perform the recognition task in which you will answer questions about the blue and yellow groups. Before going further, make sure you memorized the information we provided about these groups: ";
+      html += "<li><strong>The faces that were presented together with <b><u>unpleasant images</b></u> were always those of the <span style='color:#2a57ea'><b>blue</b></span> group</strong></li>";
+      html += "<li><strong>The faces that were presented together with <u><b>pleasant images</b></u> were always those of the <b><span style='color:#b5a21b'><b>yellow</b></span>  group</strong></li>";
+      html += "</ul>";
+      html += "<p class = 'justify'><b>It is extremely important that you remember this information (we will ask you about it later on).</b></b></p>";
+      html += "<br><br>";
+      html += "<p></br>Press <span class='light-keys'><kbd>space</kbd></span> to start Task 1</p>";
+      return html;
+    },
+  };
+
+
+ var Instr_EC_7_Instruction_posBlue = {
+    type: "html-keyboard-response",
+    post_trial_gap: 300,
+    choices: [32],
+    stimulus: function () {
+      var html = "";
+      html += "<h1>TASK 2: Recognition task</h1>";
+      html += "<p class = 'justify'>You will now perform the recognition task in which you will answer questions about the blue and yellow groups. Before going further, make sure you memorized the information we provided about these groups: ";
+      html += "<li><strong>The faces that will be presented together with <b><u>pleasant images</b></u> will always be those of the <span style='color:#2a57ea'><b>blue</b></span> group</strong></li>";
+      html += "<li><strong>The faces that will be presented together with <u><b>unpleasant images</b></u> will always be those of the <b><span style='color:#b5a21b'><b>yellow</b></span>  group</strong></li>";
+      html += "</ul>";
+      html += "<p class = 'justify'><b>It is extremely important that you remember this information (we will ask you about it later on).</b></b></p>";
+      html += "<br><br>";
+      html += "<p></br>Press <span class='light-keys'><kbd>space</kbd></span> to start Task 1</p>";
+      return html;
+    },
+  };
+
+ var Instr_EC_7_Instruction_posYellow = {
+    type: "html-keyboard-response",
+    post_trial_gap: 300,
+    choices: [32],
+    stimulus: function () {
+      var html = "";
+      html += "<h1>TASK 2: Recognition task</h1>";
+      html += "<p class = 'justify'>You will now perform the recognition task in which you will answer questions about the blue and yellow groups. Before going further, make sure you memorized the information we provided about these groups: ";
+      html += "<li><strong>The faces that will be presented together with <b><u>pleasant images</b></u> will always be those of the <span style='color:#b5a21b'><b>yellow</b></span> group</strong></li>";
+      html += "<li><strong>The faces that will be presented together with <u><b>unpleasant images</b></u> will always be those of the <b><span style='color:#2a57ea'><b>blue</b></span>  group</strong></li>";
+      html += "</ul>";
+      html += "<p class = 'justify'><b>It is extremely important that you remember this information (we will ask you about it later on).</b></b></p>";
+      html += "<br><br>";
+      html += "<p></br>Press <span class='light-keys'><kbd>space</kbd></span> to start Task 1</p>";
+      return html;
+    },
+  };
+
 // Here we generate conditional EC instructions based on the control variables 
 // Define variable for each instruction step based on conditions before pushing to the timeline
 
@@ -775,6 +849,16 @@ if (pairing_cond === "placebo" && valence_color_BrP === "brown_pos") {
   Instr_EC_6 = Instr_EC_6_Instruction_posYellow;
 }
 
+if (pairing_cond === "placebo" && valence_color_BY === "blue_pos") {
+  Instr_EC_7 = Instr_EC_7_Placebo_posBlue;
+} else if (pairing_cond === "placebo" && valence_color_BY === "yellow_pos") {
+  Instr_EC_7 = Instr_EC_7_Placebo_posYellow;
+} else if (pairing_cond === "instruction" && valence_color_BY === "blue_pos") {
+  Instr_EC_7 = Instr_EC_7_Instruction_posBlue;
+} else {
+  Instr_EC_7 = Instr_EC_7_Instruction_posYellow;
+}
+
   // EC ---------------------------------------------------------------------------------------------------------------
   var evacond = {
     timeline_variables: stims,
@@ -782,7 +866,7 @@ if (pairing_cond === "placebo" && valence_color_BrP === "brown_pos") {
     choices: jsPsych.NO_KEYS,
     trial_duration: delayTrial,
     post_trial_gap: delayIti,
-    repetitions: 2, // total: 32 trials
+    repetitions: 4, // total: 32 trials
     on_load: function () {
       $('.jspsych-content').css({ "max-width": "100%" });
     },
@@ -819,7 +903,7 @@ if (pairing_cond === "placebo" && valence_color_BrP === "brown_pos") {
     stimulus: function () {
         var html = "";
         html += "<h1>TASK 2: Recognition task</h1>";
-        html += "<p class = 'justify'>You will now perform the recognition task. You should know that <b>each group of faces</b> that you previously saw ";
+        html += "<p class = 'justify'>You should know that <b>each group of faces</b> that you previously saw ";
         html += "(those with a " + color1 + " background and those with a " + color2 + " background) ";
         html += "was in fact <b>very different from the other group.</b></br></br>";
         html += "Moreover, <b>within each group</b>, the faces also shared a series of physical characteristics, ";
@@ -1292,6 +1376,7 @@ if (pairing_cond === "placebo") {
                 Instr_EC_4,
                 Instr_EC_5,
                 Instr_EC_6,
+                Instr_EC_7,
 
                 // Reverse correlation procedure 
                 RCinst1,
