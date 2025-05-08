@@ -1034,6 +1034,20 @@ if (pairing_cond === "placebo" && valence_color_BY === "blue_pos") {
 
     var RCstim = genFacesPerSlide(12, imgsRC); // RC fast-12: 250 trials (6 ori + 6 anti = 12  faces per trial)
 
+// to avoid delay in image display
+var decode_RC_images = {
+  type: "call-function",
+  func: function () {
+    RCstim.forEach(trial => {
+      trial.trialImgs.forEach(src => {
+        const img = new Image();
+        img.src = src;
+        img.decode(); // hint the browser to decode now
+      });
+    });
+  }
+};
+
 /* RC */
     var i = 1;
     var RC1 = {
@@ -1383,6 +1397,7 @@ if (pairing_cond === "placebo") {
                 RCinst2,
                 RCinst3a,
                 RCinst4,
+                decode_RC_images,
                 RC1,
                 RCinst5,
                 RCinst3b,
