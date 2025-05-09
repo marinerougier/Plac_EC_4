@@ -910,6 +910,15 @@ if (pairing_cond === "placebo" && valence_color_BY === "blue_pos") {
     }]
   };
 
+// so that the browser has the time to download the pictures
+var instruction_prebuffer_delay = {
+  type: "html-keyboard-response",
+  stimulus: "",
+  choices: jsPsych.NO_KEYS,
+  trial_duration: 300, // 300 ms is often enough
+  post_trial_gap: 0
+};
+
   /* RC INSTRUCTIONS */
   var RCinst1 = {
     type: "html-keyboard-response",
@@ -1401,6 +1410,7 @@ if (pairing_cond === "placebo") {
                 Instr_EC_1,
                 evacond,
                 decode_instruction_faces,
+                instruction_prebuffer_delay,
                 Instr_EC_2,
                 Instr_EC_3,
                 Instr_EC_4,
