@@ -357,6 +357,20 @@ var unused_group2 = all_group2_faces.filter(f => !used_CS.includes(f));
 
 
   /* EC INSTRUCTIONS */
+
+// To avoid delay in images display
+var decode_instruction_faces = {
+  type: 'call-function',
+  func: function () {
+    const allFacePaths = faces; // this is already your preloaded instruction image list
+    allFacePaths.forEach(src => {
+      const img = new Image();
+      img.src = src;
+      img.decode(); // decode all instruction faces (blue/yellow/pink/brown)
+    });
+  }
+};
+
  var Instr_EC_1 = {
     type: "html-keyboard-response",
     post_trial_gap: 300,
@@ -1386,6 +1400,7 @@ if (pairing_cond === "placebo") {
                 // EC procedure (placebo vs. mere instruction)
                 Instr_EC_1,
                 evacond,
+                decode_instruction_faces,
                 Instr_EC_2,
                 Instr_EC_3,
                 Instr_EC_4,
